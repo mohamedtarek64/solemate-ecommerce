@@ -1,0 +1,278 @@
+/* Product List Styles */
+.product-list {
+  @apply grid gap-6;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.product-list.compact {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  @apply gap-4;
+}
+
+.product-list.detailed {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  @apply gap-8;
+}
+
+/* Product Card Styles */
+.product-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-orange-300;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-card-image {
+  @apply relative w-full overflow-hidden;
+  height: 280px; /* Fixed height for all product cards */
+  background: transparent; /* Remove gray background */
+}
+
+.product-card-image img {
+  @apply w-full transition-transform duration-300;
+  height: 280px; /* Fixed height to match container */
+  object-fit: cover; /* Use cover to fill entire container without gaps */
+  object-position: center; /* Center the image */
+  background-color: transparent; /* Remove white background */
+}
+
+.product-card:hover .product-card-image img {
+  transform: scale(1.05);
+}
+
+.product-card-badge {
+  @apply absolute top-2 left-2 px-2 py-1 text-xs font-medium rounded-full;
+}
+
+.product-card-badge.sale {
+  @apply bg-red-500 text-white;
+}
+
+.product-card-badge.new {
+  @apply bg-green-500 text-white;
+}
+
+.product-card-badge.featured {
+  @apply bg-orange-500 text-white;
+}
+
+.product-card-content {
+  @apply p-4;
+}
+
+.product-card-title {
+  @apply text-sm font-medium text-gray-900 line-clamp-2 mb-2;
+}
+
+.product-card-rating {
+  @apply flex items-center mb-2;
+}
+
+.product-card-rating-stars {
+  @apply flex text-yellow-400;
+}
+
+.product-card-rating-count {
+  @apply text-xs text-gray-500 ml-1;
+}
+
+.product-card-price {
+  @apply flex items-center gap-2 mb-3;
+}
+
+.product-card-price-current {
+  @apply text-lg font-bold text-orange-600;
+}
+
+.product-card-price-original {
+  @apply text-sm text-gray-500 line-through;
+}
+
+.product-card-price-discount {
+  @apply text-xs text-red-600 font-medium;
+}
+
+.product-card-actions {
+  @apply flex gap-2;
+}
+
+.product-card-btn {
+  @apply flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors duration-200;
+}
+
+.product-card-btn-primary {
+  @apply bg-orange-600 text-white hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+}
+
+.product-card-btn-secondary {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+}
+
+.product-card-btn-icon {
+  @apply p-2 text-gray-400 hover:text-orange-600 transition-colors duration-200;
+}
+
+/* Product Filters */
+.product-filters {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6;
+}
+
+.product-filters-title {
+  @apply text-lg font-semibold text-gray-900 mb-4;
+}
+
+.product-filters-section {
+  @apply mb-6 last:mb-0;
+}
+
+.product-filters-section-title {
+  @apply text-sm font-medium text-gray-700 mb-3;
+}
+
+.product-filters-checkbox {
+  @apply flex items-center mb-2;
+}
+
+.product-filters-checkbox input {
+  @apply h-4 w-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500;
+}
+
+.product-filters-checkbox label {
+  @apply ml-2 text-sm text-gray-700 cursor-pointer;
+}
+
+.product-filters-range {
+  @apply space-y-2;
+}
+
+.product-filters-range input {
+  @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+}
+
+.product-filters-range input::-webkit-slider-thumb {
+  @apply appearance-none h-4 w-4 bg-orange-600 rounded-full cursor-pointer;
+}
+
+.product-filters-range input::-moz-range-thumb {
+  @apply h-4 w-4 bg-orange-600 rounded-full cursor-pointer border-0;
+}
+
+/* Product Sorting */
+.product-sorting {
+  @apply flex items-center justify-between mb-6;
+}
+
+.product-sorting-results {
+  @apply text-sm text-gray-600;
+}
+
+.product-sorting-select {
+  @apply min-w-0 flex-1 max-w-xs;
+}
+
+.product-sorting-select select {
+  @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm;
+}
+
+/* Product Grid Toggle */
+.product-grid-toggle {
+  @apply flex items-center gap-2;
+}
+
+.product-grid-toggle-btn {
+  @apply p-2 text-gray-400 hover:text-orange-600 transition-colors duration-200;
+}
+
+.product-grid-toggle-btn.active {
+  @apply text-orange-600;
+}
+
+/* Product Loading States */
+.product-skeleton {
+  @apply animate-pulse;
+}
+
+.product-skeleton-image {
+  @apply bg-gray-200 rounded-lg w-full;
+  height: 280px; /* Match product card image height */
+}
+
+.product-skeleton-content {
+  @apply p-4 space-y-3;
+}
+
+.product-skeleton-title {
+  @apply bg-gray-200 rounded h-4 w-3/4;
+}
+
+.product-skeleton-price {
+  @apply bg-gray-200 rounded h-6 w-1/2;
+}
+
+.product-skeleton-rating {
+  @apply bg-gray-200 rounded h-4 w-1/3;
+}
+
+/* Product Empty State */
+.product-empty {
+  @apply text-center py-12;
+}
+
+.product-empty-icon {
+  @apply mx-auto h-12 w-12 text-gray-400 mb-4;
+}
+
+.product-empty-title {
+  @apply text-lg font-medium text-gray-900 mb-2;
+}
+
+.product-empty-description {
+  @apply text-gray-500 mb-6;
+}
+
+.product-empty-btn {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .product-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    @apply gap-3;
+  }
+
+  .product-card-content {
+    @apply p-3;
+  }
+
+  .product-card-title {
+    @apply text-xs;
+  }
+
+  .product-card-price-current {
+    @apply text-base;
+  }
+
+  .product-filters {
+    @apply p-4;
+  }
+
+  .product-sorting {
+    @apply flex-col gap-3;
+  }
+
+  .product-sorting-select {
+    @apply max-w-none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-list {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .product-list.detailed {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}

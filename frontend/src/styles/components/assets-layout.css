@@ -1,0 +1,353 @@
+/* Layout Styles - Amazon-like Design */
+
+/* Header Styles */
+.header {
+  @apply bg-white shadow-sm border-b border-gray-200;
+}
+
+.header-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.header-content {
+  @apply flex items-center justify-between h-16;
+}
+
+/* Logo Styles */
+.logo {
+  @apply flex items-center;
+}
+
+.logo-image {
+  @apply h-8 w-auto;
+}
+
+.logo-text {
+  @apply ml-2 text-xl font-bold text-orange-600;
+}
+
+/* Navigation Styles */
+.nav {
+  @apply hidden md:flex md:space-x-8;
+}
+
+.nav-item {
+  @apply text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+}
+
+.nav-item-active {
+  @apply text-orange-600 bg-orange-50;
+}
+
+/* Search Bar Styles */
+.search-container {
+  @apply flex-1 max-w-lg mx-4;
+}
+
+.search-form {
+  @apply relative;
+}
+
+.search-input {
+  @apply block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm;
+}
+
+.search-button {
+  @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
+}
+
+.search-icon {
+  @apply h-5 w-5 text-gray-400;
+}
+
+/* User Menu Styles */
+.user-menu {
+  @apply flex items-center space-x-4;
+}
+
+.user-menu-button {
+  @apply flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500;
+}
+
+.user-avatar {
+  @apply h-8 w-8 rounded-full;
+}
+
+.user-name {
+  @apply ml-2 text-gray-700 font-medium;
+}
+
+/* Cart Styles */
+.cart-button {
+  @apply relative p-2 text-gray-700 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500;
+}
+
+.cart-icon {
+  @apply h-6 w-6;
+}
+
+.cart-badge {
+  @apply absolute -top-1 -right-1 h-5 w-5 bg-orange-600 text-white text-xs rounded-full flex items-center justify-center;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu-button {
+  @apply md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500;
+}
+
+.mobile-menu {
+  @apply md:hidden;
+}
+
+.mobile-menu-items {
+  @apply px-2 pt-2 pb-3 space-y-1 sm:px-3;
+}
+
+.mobile-menu-item {
+  @apply text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium;
+}
+
+/* Footer Styles */
+.footer {
+  @apply bg-gray-900 text-white;
+}
+
+.footer-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+}
+
+.footer-content {
+  @apply grid grid-cols-1 md:grid-cols-4 gap-8;
+}
+
+.footer-section {
+  @apply space-y-4;
+}
+
+.footer-title {
+  @apply text-sm font-semibold text-gray-300 uppercase tracking-wider;
+}
+
+.footer-links {
+  @apply space-y-2;
+}
+
+.footer-link {
+  @apply text-sm text-gray-400 hover:text-white transition-colors duration-200;
+}
+
+.footer-bottom {
+  @apply border-t border-gray-800 mt-8 pt-8;
+}
+
+.footer-bottom-content {
+  @apply flex flex-col md:flex-row justify-between items-center;
+}
+
+.footer-copyright {
+  @apply text-sm text-gray-400;
+}
+
+.footer-social {
+  @apply flex space-x-4 mt-4 md:mt-0;
+}
+
+.footer-social-link {
+  @apply text-gray-400 hover:text-white transition-colors duration-200;
+}
+
+/* Main Content Styles */
+.main-content {
+  @apply flex-1;
+}
+
+.content-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+}
+
+/* Breadcrumb Styles */
+.breadcrumb {
+  @apply flex items-center space-x-2 text-sm text-gray-500 mb-6;
+}
+
+.breadcrumb-item {
+  @apply hover:text-orange-600 transition-colors duration-200;
+}
+
+.breadcrumb-separator {
+  @apply text-gray-400;
+}
+
+.breadcrumb-current {
+  @apply text-gray-900 font-medium;
+}
+
+/* Page Header Styles */
+.page-header {
+  @apply mb-8;
+}
+
+.page-title {
+  @apply text-3xl font-bold text-gray-900;
+}
+
+.page-subtitle {
+  @apply mt-2 text-lg text-gray-600;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+}
+
+.card-header {
+  @apply px-6 py-4 border-b border-gray-200;
+}
+
+.card-title {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.card-content {
+  @apply px-6 py-4;
+}
+
+.card-footer {
+  @apply px-6 py-4 border-t border-gray-200 bg-gray-50;
+}
+
+/* Button Styles */
+.btn {
+  @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200;
+}
+
+.btn-primary {
+  @apply text-white bg-orange-600 hover:bg-orange-700 focus:ring-orange-500;
+}
+
+.btn-secondary {
+  @apply text-gray-700 bg-white border-gray-300 hover:bg-gray-50 focus:ring-orange-500;
+}
+
+.btn-success {
+  @apply text-white bg-green-600 hover:bg-green-700 focus:ring-green-500;
+}
+
+.btn-danger {
+  @apply text-white bg-red-600 hover:bg-red-700 focus:ring-red-500;
+}
+
+.btn-sm {
+  @apply px-3 py-1.5 text-xs;
+}
+
+.btn-lg {
+  @apply px-6 py-3 text-base;
+}
+
+/* Loading States */
+.loading {
+  @apply animate-pulse;
+}
+
+.loading-spinner {
+  @apply animate-spin rounded-full h-6 w-6 border-b-2 border-orange-600;
+}
+
+.loading-text {
+  @apply text-gray-500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content {
+    @apply h-14;
+  }
+  
+  .search-container {
+    @apply hidden;
+  }
+  
+  .nav {
+    @apply hidden;
+  }
+  
+  .user-menu {
+    @apply space-x-2;
+  }
+  
+  .user-name {
+    @apply hidden;
+  }
+  
+  .footer-content {
+    @apply grid-cols-2;
+  }
+  
+  .content-container {
+    @apply px-4 py-6;
+  }
+  
+  .page-title {
+    @apply text-2xl;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-content {
+    @apply grid-cols-1;
+  }
+  
+  .footer-bottom-content {
+    @apply flex-col space-y-4;
+  }
+  
+  .card {
+    @apply rounded-none border-l-0 border-r-0;
+  }
+  
+  .card-header,
+  .card-content,
+  .card-footer {
+    @apply px-4;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .header {
+    @apply bg-gray-900 border-gray-700;
+  }
+  
+  .nav-item {
+    @apply text-gray-300 hover:text-orange-400;
+  }
+  
+  .search-input {
+    @apply bg-gray-800 border-gray-600 text-white placeholder-gray-400;
+  }
+  
+  .user-name {
+    @apply text-gray-300;
+  }
+  
+  .card {
+    @apply bg-gray-800 border-gray-700;
+  }
+  
+  .card-title {
+    @apply text-white;
+  }
+  
+  .page-title {
+    @apply text-white;
+  }
+  
+  .page-subtitle {
+    @apply text-gray-400;
+  }
+  
+  .breadcrumb-current {
+    @apply text-white;
+  }
+}

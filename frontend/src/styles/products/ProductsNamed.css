@@ -1,0 +1,16 @@
+/* ProductsNamed specific styles */
+.form-input {
+  background-color: #262626;
+  border: 0;
+  color: white;
+}
+
+.form-input:focus {
+  ring: 1;
+  ring-color: #f97306;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}

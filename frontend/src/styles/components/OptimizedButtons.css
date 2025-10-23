@@ -1,0 +1,259 @@
+/* Optimized Button Styles for Performance */
+
+/* Base button optimizations */
+button {
+  will-change: transform, background-color;
+  transform: translateZ(0); /* Force GPU acceleration */
+  transition: all 0.2s ease; /* Faster transitions */
+}
+
+/* Loading states */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: scale(0.98);
+}
+
+/* Loading spinner animation */
+button.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Quantity controls optimization */
+.quantity-controls button {
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4a3421;
+  background: rgba(42, 30, 18, 0.6);
+  color: #ccaa8e;
+  transition: all 0.2s ease;
+}
+
+.quantity-controls button:hover:not(:disabled) {
+  background: rgba(74, 52, 33, 0.8);
+  color: #d4a574;
+}
+
+/* Action buttons optimization */
+.action-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.action-btn:hover::before {
+  left: 100%;
+}
+
+/* Cart specific optimizations */
+.cart-item-actions button {
+  min-width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Wishlist specific optimizations */
+.wishlist-item-actions button {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Orders specific optimizations */
+.order-actions button {
+  min-width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effects optimization */
+button:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus states for accessibility */
+button:focus-visible {
+  outline: 2px solid #d4a574;
+  outline-offset: 2px;
+}
+
+/* Loading text animation */
+button.loading-text {
+  position: relative;
+}
+
+button.loading-text::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Responsive optimizations */
+@media (max-width: 768px) {
+  button {
+    min-height: 44px; /* Better touch targets on mobile */
+  }
+
+  .quantity-controls button {
+    min-width: 36px;
+    height: 36px;
+  }
+
+  .action-btn {
+    min-width: 44px;
+    height: 44px;
+  }
+}
+
+/* Dark theme specific optimizations */
+.dark button {
+  color-scheme: dark;
+}
+
+/* Performance hints */
+button {
+  contain: layout style paint;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth transitions for state changes */
+button[data-loading="true"] {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Optimized button groups */
+.button-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.button-group button {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Icon buttons optimization */
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4a3421;
+  background: rgba(42, 30, 18, 0.6);
+  color: #ccaa8e;
+  transition: all 0.2s ease;
+}
+
+.icon-button:hover:not(:disabled) {
+  background: rgba(74, 52, 33, 0.8);
+  color: #d4a574;
+  transform: scale(1.1);
+}
+
+/* Text buttons optimization */
+.text-button {
+  background: transparent;
+  border: none;
+  color: #ccaa8e;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.text-button:hover:not(:disabled) {
+  background: rgba(74, 52, 33, 0.6);
+  color: #d4a574;
+}
+
+/* Primary buttons optimization */
+.primary-button {
+  background: linear-gradient(135deg, #d4a574 0%, #ccaa8e 100%);
+  color: #231910;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(212, 165, 116, 0.3);
+}
+
+.primary-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(212, 165, 116, 0.4);
+}
+
+/* Secondary buttons optimization */
+.secondary-button {
+  background: rgba(74, 52, 33, 0.6);
+  color: #ccaa8e;
+  border: 1px solid #4a3421;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: rgba(74, 52, 33, 0.8);
+  color: #d4a574;
+  border-color: #d4a574;
+}

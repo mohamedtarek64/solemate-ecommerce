@@ -1,0 +1,77 @@
+.lazy-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.lazy-image {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  position: relative;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.placeholder-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+}
+
+.placeholder-content svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .lazy-image-container {
+    border-radius: 6px;
+  }
+
+  .lazy-image-placeholder {
+    border-radius: 6px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .lazy-image-placeholder {
+    background-color: #374151;
+  }
+
+  .placeholder-content {
+    color: #6b7280;
+  }
+
+  .spinner {
+    border-color: #4b5563;
+    border-top-color: #60a5fa;
+  }
+}

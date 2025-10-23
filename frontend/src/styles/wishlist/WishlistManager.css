@@ -1,0 +1,96 @@
+/* Wishlist Manager Styles */
+.wishlist-manager-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.wishlist-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.wishlist-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.empty-wishlists {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f97306 0%, #e55a00 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(249, 115, 6, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(249, 115, 6, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .grid-cols-1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-1 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Loading Spinner */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wishlist-header h1 {
+    font-size: 1.875rem;
+  }
+
+  .wishlist-content {
+    padding: 0 1rem;
+  }
+
+  .btn-primary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}

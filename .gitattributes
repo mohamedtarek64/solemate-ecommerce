@@ -1,0 +1,112 @@
+# Git Attributes for SoleMate E-Commerce Platform
+# Improves Git handling and line ending consistency
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# PHP files
+*.php text eol=lf
+*.blade.php text eol=lf
+
+# JavaScript/Vue files
+*.js text eol=lf
+*.vue text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+
+# CSS files
+*.css text eol=lf
+*.scss text eol=lf
+*.sass text eol=lf
+
+# JSON files
+*.json text eol=lf
+
+# YAML files
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Markdown files
+*.md text eol=lf
+
+# Configuration files
+*.conf text eol=lf
+*.ini text eol=lf
+*.cnf text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Docker files
+Dockerfile* text eol=lf
+docker-compose*.yml text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.sql binary
+
+# Composer files
+composer.json text eol=lf
+composer.lock text eol=lf
+
+# Package files
+package.json text eol=lf
+package-lock.json text eol=lf
+
+# Environment files
+.env* text eol=lf
+
+# Git files
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Documentation
+README* text eol=lf
+LICENSE text eol=lf
+CHANGELOG* text eol=lf
+
+# Exclude from diff
+*.log -diff
+*.sql -diff
+*.dump -diff
+*.backup -diff
+
+# Exclude from merge
+*.lock -merge
+
+# Exclude from export
+node_modules/ export-ignore
+vendor/ export-ignore
+storage/ export-ignore
+bootstrap/cache/ export-ignore
+.git/ export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+.env export-ignore
+.env.* export-ignore
+!.env.example export-ignore
+*.log export-ignore
+*.sql export-ignore
+*.dump export-ignore
+*.backup export-ignore
+.DS_Store export-ignore
+Thumbs.db export-ignore
+.vscode/ export-ignore
+.idea/ export-ignore
+*.swp export-ignore
+*.swo export-ignore
+*~ export-ignore
+

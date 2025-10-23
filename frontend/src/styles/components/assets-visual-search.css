@@ -1,0 +1,47 @@
+/**
+ * Visual Search Styles
+ */
+
+.visual-search-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+}
+
+.visual-search-header {
+  @apply mb-8;
+}
+
+.visual-search-title {
+  @apply text-3xl font-bold text-gray-900 mb-2;
+}
+
+.visual-search-subtitle {
+  @apply text-gray-600;
+}
+
+.visual-search-content {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-8;
+}
+
+.image-uploader {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+}
+
+.image-upload-area {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors duration-200 cursor-pointer;
+}
+
+.visual-results {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+}
+
+.visual-result-item {
+  @apply flex items-center space-x-4 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-200;
+}
+
+.similar-products {
+  @apply mt-8;
+}
+
+.similar-products-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4;
+}

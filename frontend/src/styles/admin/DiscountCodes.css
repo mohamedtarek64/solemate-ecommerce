@@ -1,0 +1,242 @@
+/* ============================================ */
+/* Discount Codes Admin Page */
+/* Aligned with SoleMate Design System */
+/* Primary Color: #f97306 (Orange) */
+/* ============================================ */
+
+/* Base */
+.admin-dashboard {
+  min-height: 100vh;
+  background-color: #1C1C1C;
+}
+
+/* Discount Codes Grid */
+.discount-codes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.code-card {
+  background-color: #232323;
+  border: 1px solid #3A3A3A;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.code-card:hover {
+  border-color: #f97306;
+  box-shadow: 0 4px 12px rgba(249, 115, 6, 0.15);
+  transform: translateY(-2px);
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+    align-items: center;
+  margin-bottom: 1rem;
+}
+
+.code-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f97306;
+  font-family: 'Courier New', monospace;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background-color: #10B981;
+  color: white;
+}
+
+.status-badge.inactive {
+  background-color: #6B7280;
+  color: white;
+}
+
+.code-body {
+  margin-bottom: 1rem;
+}
+
+.code-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #F3F4F6;
+  margin-bottom: 0.5rem;
+}
+
+.code-description {
+  font-size: 0.875rem;
+  color: #9CA3AF;
+  margin-bottom: 1rem;
+}
+
+.code-details {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: #D1D5DB;
+}
+
+.detail-item i {
+  color: #f97306;
+}
+
+/* Enhanced datetime-local inputs */
+input[type="datetime-local"] {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+  filter: invert(1);
+  background-color: rgba(249, 115, 6, 0.1);
+}
+
+/* Calendar popup styling (webkit browsers) */
+input[type="datetime-local"]::-webkit-datetime-edit {
+  padding: 2px;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 2px;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-text {
+  color: #9CA3AF;
+  padding: 0 2px;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-month-field,
+input[type="datetime-local"]::-webkit-datetime-edit-day-field,
+input[type="datetime-local"]::-webkit-datetime-edit-year-field,
+input[type="datetime-local"]::-webkit-datetime-edit-hour-field,
+input[type="datetime-local"]::-webkit-datetime-edit-minute-field,
+input[type="datetime-local"]::-webkit-datetime-edit-meridiem-field {
+  color: #F3F4F6;
+  font-weight: 500;
+}
+
+/* Tooltip animations */
+@keyframes tooltip-fade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 5px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+  .discount-codes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Action Buttons */
+.code-card button {
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.code-card button:active {
+  transform: scale(0.98);
+}
+
+.code-card button i {
+  vertical-align: middle;
+}
+
+.code-card button span {
+  vertical-align: middle;
+}
+
+/* Enhanced Tooltips */
+.code-card button > div {
+  z-index: 50;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .code-card button {
+    flex-direction: column;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .code-card button i {
+    margin-right: 0;
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+  }
+  
+  .code-card button span {
+    font-size: 0.75rem;
+  }
+}
+
+

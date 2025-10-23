@@ -1,0 +1,260 @@
+/* Global Mobile Optimizations - Applied to All Pages */
+
+/* Mobile-only styles (< 768px) */
+@media (max-width: 768px) {
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* Container adjustments */
+  .container,
+  [class*="container"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    max-width: 100% !important;
+  }
+
+  /* Header mobile optimization */
+  header {
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* Touch-friendly buttons */
+  button,
+  .button,
+  [role="button"],
+  a[class*="button"],
+  a[class*="btn"] {
+    min-width: 44px;
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Better tap feedback */
+  button:active,
+  .button:active,
+  [role="button"]:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+
+  /* Prevent zoom on input focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Better spacing for mobile */
+  .px-10 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .px-8 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* Grid adjustments */
+  .grid {
+    gap: 1rem !important;
+  }
+
+  /* Make images responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Hidden elements on mobile */
+  .hidden.md\\:flex,
+  .hidden.lg\\:flex {
+    display: none !important;
+  }
+
+  /* Show mobile menu */
+  .md\\:hidden {
+    display: flex !important;
+  }
+
+  /* Text size adjustments */
+  .text-9xl {
+    font-size: 3.5rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .text-7xl {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .text-6xl {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .text-5xl {
+    font-size: 1.75rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .text-4xl {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .text-3xl {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Smooth scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Better video controls */
+  video {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Prevent text selection on UI elements */
+  button,
+  [role="button"],
+  .nav-link,
+  .action-button {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* iOS safe area support */
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Modal optimizations */
+  [class*="modal"],
+  [class*="sidebar"] {
+    max-width: 100vw !important;
+  }
+
+  /* Card optimizations */
+  [class*="card"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Flexbox adjustments */
+  .flex-row {
+    flex-direction: column !important;
+  }
+
+  /* Gap adjustments */
+  .gap-8 {
+    gap: 1rem !important;
+  }
+
+  .gap-6 {
+    gap: 0.75rem !important;
+  }
+
+  .gap-4 {
+    gap: 0.5rem !important;
+  }
+}
+
+/* Extra small devices (< 480px) */
+@media (max-width: 480px) {
+  /* Further text size reductions */
+  .text-9xl {
+    font-size: 2.5rem !important;
+  }
+
+  .text-7xl {
+    font-size: 2rem !important;
+  }
+
+  .text-6xl {
+    font-size: 1.75rem !important;
+  }
+
+  .text-5xl {
+    font-size: 1.5rem !important;
+  }
+
+  .text-4xl {
+    font-size: 1.25rem !important;
+  }
+
+  .text-3xl {
+    font-size: 1.125rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1rem !important;
+  }
+
+  /* Smaller padding */
+  header {
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .container,
+  [class*="container"] {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* Smaller buttons on very small screens */
+  button,
+  .button {
+    padding: 0.625rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* Grid to single column */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Landscape mode optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  /* Reduce vertical padding */
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Compact hero section */
+  .hero-section,
+  section[class*="hero"] {
+    min-height: 60vh !important;
+  }
+}
+
+/* Touch-friendly enhancements for all pages */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  a, button, [role="button"], input[type="button"], input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove hover effects on touch devices */
+  *:hover {
+    transition-duration: 0s;
+  }
+
+  /* Better tap highlighting */
+  * {
+    -webkit-tap-highlight-color: rgba(249, 115, 6, 0.1);
+  }
+}

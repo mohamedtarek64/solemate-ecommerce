@@ -1,0 +1,80 @@
+{
+  "name": "solemate-vue",
+  "version": "1.0.0",
+  "description": "SoleMate Sneakers - Vue.js 3 E-commerce Application",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "vite build",
+    "build:analyze": "vite build --mode analyze",
+    "preview": "vite preview --port 3000",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "test": "echo 'No tests configured yet' && exit 0",
+    "test:unit": "echo 'Unit tests not implemented yet' && exit 0",
+    "format": "prettier --write src/",
+    "type-check": "vue-tsc --noEmit",
+    "serve": "vite preview --port 3000 --host",
+    "perf:clear-cache": "node -e \"console.log('Clearing cache...'); if (typeof localStorage !== 'undefined') { Object.keys(localStorage).filter(k => k.startsWith('cache:')).forEach(k => localStorage.removeItem(k)); console.log('✅ Cache cleared!'); }\"",
+    "perf:monitor": "node -e \"console.log('🚀 Performance monitoring enabled. Check browser console for stats.')\"",
+    "optimize": "npm run build && npm run preview"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.2.0",
+    "@stripe/stripe-js": "^7.9.0",
+    "axios": "^1.6.0",
+    "chart.js": "^4.5.0",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.0",
+    "vue-lazyload": "^3.0.0",
+    "vue-router": "^4.2.5",
+    "vue-toastification": "^2.0.0-rc.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.1",
+    "sass": "^1.69.7",
+    "tailwindcss": "^3.4.0",
+    "terser": "^5.24.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vue-tsc": "^1.8.25"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "vue3",
+    "ecommerce",
+    "sneakers",
+    "shoes",
+    "fashion",
+    "shopping",
+    "pinia",
+    "vite",
+    "tailwindcss",
+    "responsive",
+    "pwa"
+  ],
+  "author": "SoleMate Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solemate/vue-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/solemate/vue-app/issues"
+  },
+  "homepage": "https://solemate.com"
+}

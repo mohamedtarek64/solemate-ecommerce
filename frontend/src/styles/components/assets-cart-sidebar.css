@@ -1,0 +1,200 @@
+/* Cart Sidebar Container */
+.cart-sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.cart-sidebar-container.open {
+  pointer-events: auto;
+}
+
+/* Cart Sidebar Styles */
+.cart-sidebar {
+  font-family: 'Space Grotesk', 'Noto Sans', sans-serif;
+  /* Default hidden state */
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-sidebar.open {
+  transform: translateX(0);
+}
+
+.cart-sidebar .product-image {
+  transition: transform 0.2s ease;
+}
+
+.cart-sidebar .product-image:hover {
+  transform: scale(1.05);
+}
+
+.cart-sidebar .quantity-controls button {
+  transition: all 0.2s ease;
+}
+
+.cart-sidebar .quantity-controls button:hover {
+  transform: scale(1.1);
+}
+
+.cart-sidebar .action-button {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-sidebar .action-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.cart-sidebar .action-button:hover::before {
+  left: 100%;
+}
+
+.cart-sidebar .action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.cart-sidebar .size-select {
+  transition: all 0.2s ease;
+}
+
+.cart-sidebar .size-select:focus {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
+.cart-sidebar .stock-warning {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.cart-sidebar .price-highlight {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cart-sidebar .free-shipping {
+  background: linear-gradient(45deg, #4ade80, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .cart-sidebar .product-details {
+    font-size: 0.875rem;
+  }
+  
+  .cart-sidebar .action-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .cart-sidebar .quantity-controls button {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Animation for cart items */
+.cart-item-enter-active,
+.cart-item-leave-active {
+  transition: all 0.3s ease;
+}
+
+.cart-item-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.cart-item-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Loading state */
+.cart-loading {
+  position: relative;
+}
+
+.cart-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Force visibility for debugging */
+.cart-sidebar-debug {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 28rem !important;
+  height: 100vh !important;
+  background: white !important;
+  z-index: 10000 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  box-shadow: -10px 0 25px rgba(0,0,0,0.1) !important;
+}
+
+/* Emergency visibility fix */
+.cart-sidebar-container.open .cart-sidebar {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
+}

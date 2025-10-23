@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Diagnostic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .info-box {
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .error {
+            border-left-color: #f44336;
+        }
+        .warning {
+            border-left-color: #ff9800;
+        }
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .danger {
+            background: #f44336;
+        }
+        .danger:hover {
+            background: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Auth Diagnostic Tool</h1>
+
+        <div class="info-box">
+            <h3>Current User Data:</h3>
+            <pre id="userData"></pre>
+        </div>
+
+        <div class="info-box">
+            <h3>Auth Token:</h3>
+            <pre id="authToken"></pre>
+        </div>
+
+        <div class="info-box">
+            <h3>All LocalStorage Data:</h3>
+            <pre id="allStorage"></pre>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button onclick="refreshData()">🔄 Refresh Data</button>
+            <button onclick="clearAuth()" class="danger">🗑️ Clear Auth Data</button>
+        </div>
+    </div>
+
+    <script>
+        function displayAuthData() {
+            // Get user data
+            const userData = localStorage.getItem('user_data');
+            const userDataAlt = localStorage.getItem('user');
+            const authToken = localStorage.getItem('auth_token');
+
+            // Display user data
+            if (userData) {
+                try {
+                    const parsed = JSON.parse(userData);
+                    document.getElementById('userData').textContent = JSON.stringify(parsed, null, 2);
+
+                    // Check role
+                    if (parsed.role) {
+                        document.querySelector('.info-box').classList.remove('error', 'warning');
+                        if (parsed.role === 'admin') {
+                            document.querySelector('.info-box').classList.add('warning');
+                        }
+                    }
+                } catch (e) {
+                    document.getElementById('userData').textContent = 'Error parsing user data: ' + e.message;
+                    document.querySelector('.info-box').classList.add('error');
+                }
+            } else if (userDataAlt) {
+                try {
+                    const parsed = JSON.parse(userDataAlt);
+                    document.getElementById('userData').textContent = 'From "user" key:\n' + JSON.stringify(parsed, null, 2);
+                } catch (e) {
+                    document.getElementById('userData').textContent = 'Error parsing user data: ' + e.message;
+                }
+            } else {
+                document.getElementById('userData').textContent = 'No user data found';
+                document.querySelector('.info-box').classList.add('error');
+            }
+
+            // Display auth token
+            if (authToken) {
+                document.getElementById('authToken').textContent = authToken.substring(0, 50) + '...';
+            } else {
+                document.getElementById('authToken').textContent = 'No auth token found';
+            }
+
+            // Display all localStorage
+            const allData = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                allData[key] = localStorage.getItem(key);
+            }
+            document.getElementById('allStorage').textContent = JSON.stringify(allData, null, 2);
+        }
+
+        function refreshData() {
+            location.reload();
+        }
+
+        function clearAuth() {
+            if (confirm('Are you sure you want to clear all auth data?')) {
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('user_data');
+                localStorage.removeItem('user');
+                localStorage.removeItem('refresh_token');
+                alert('Auth data cleared! Please refresh the page.');
+                location.reload();
+            }
+        }
+
+        // Display data on load
+        displayAuthData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "SoleMate - Premium Sneakers",
+  "short_name": "SoleMate",
+  "description": "Discover our curated collection of premium sneakers designed for the modern lifestyle.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#ff4500",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["shopping", "fashion", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "id": "com.solemate.webapp",
+  "version": "1.0.0"
+}

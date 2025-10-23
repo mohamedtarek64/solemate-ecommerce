@@ -1,0 +1,228 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: solemate_mysql_prod
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./backup:/backup
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - solemate_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      timeout: 20s
+      retries: 10
+      interval: 30s
+
+  # Redis Cache & Queue
+  redis:
+    image: redis:7-alpine
+    container_name: solemate_redis_prod
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
+    networks:
+      - solemate_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Laravel Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: solemate_backend_prod
+    restart: always
+    environment:
+      - APP_NAME=${APP_NAME}
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_URL=${APP_URL}
+      - APP_KEY=${APP_KEY}
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+      - MAIL_MAILER=${MAIL_MAILER}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - STRIPE_KEY=${STRIPE_KEY}
+      - STRIPE_SECRET=${STRIPE_SECRET}
+    volumes:
+      - ./backend/storage:/var/www/html/storage
+      - ./backend/public:/var/www/html/public
+      - backend_logs:/var/www/html/storage/logs
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - solemate_network
+    healthcheck:
+      test: ["CMD", "php", "artisan", "health:check"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Queue Worker
+  queue-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: solemate_queue_prod
+    restart: always
+    environment:
+      - APP_ENV=production
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - QUEUE_CONNECTION=redis
+    volumes:
+      - ./backend/storage:/var/www/html/storage
+    depends_on:
+      - mysql
+      - redis
+      - backend
+    networks:
+      - solemate_network
+    command: php artisan queue:work redis --sleep=3 --tries=3 --max-time=3600
+
+  # Laravel Scheduler
+  scheduler:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: solemate_scheduler_prod
+    restart: always
+    environment:
+      - APP_ENV=production
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    volumes:
+      - ./backend/storage:/var/www/html/storage
+    depends_on:
+      - mysql
+      - redis
+      - backend
+    networks:
+      - solemate_network
+    command: >
+      sh -c "
+        while true; do
+          php artisan schedule:run >> /dev/null 2>&1
+          sleep 60
+        done
+      "
+
+  # Vue.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: solemate_frontend_prod
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - solemate_network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: solemate_nginx_prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/ssl:/etc/nginx/ssl:ro
+      - ./backend/public:/var/www/html/public:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - solemate_network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Backup Service
+  backup:
+    image: mysql:8.0
+    container_name: solemate_backup
+    restart: "no"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    volumes:
+      - ./backup:/backup
+      - ./docker/scripts/backup.sh:/backup.sh
+    depends_on:
+      - mysql
+    networks:
+      - solemate_network
+    command: /bin/bash /backup.sh
+    profiles:
+      - backup
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_logs:
+    driver: local
+
+networks:
+  solemate_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+

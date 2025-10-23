@@ -1,0 +1,20 @@
+// Export all services
+export { authService } from './authService'
+export { productService } from './productService'
+export { categoryService } from './categoryService'
+export { cartService } from './cartService'
+export { orderService } from './orderService'
+export { wishlistService } from './wishlistService'
+export { searchService } from './searchService'
+export { reviewService } from './reviewService'
+export { userService } from './userService'
+export { notificationService } from './notificationService'
+export { visualSearchService } from './visualSearchService'
+export { imageService } from './imageService'
+export { oauthService } from './oauthService'
+export { adminService } from './adminService'
+export { analyticsService } from './analyticsService'
+export { checkoutService } from './checkoutService'
+
+// Export default API instance
+export { default as api } from './api'

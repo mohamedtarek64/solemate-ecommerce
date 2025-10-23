@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="SoleMate - Premium sneakers for the modern lifestyle. Discover our curated collection of premium sneakers designed for comfort, style, and performance.">
+  <meta name="keywords" content="sneakers, shoes, footwear, fashion, lifestyle, running, basketball, skateboarding, premium, comfort, style, performance">
+  <meta name="author" content="SoleMate Team">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solemate.com/">
+  <meta property="og:title" content="SoleMate - Premium Sneakers">
+  <meta property="og:description" content="Discover our curated collection of premium sneakers designed for the modern lifestyle.">
+  <meta property="og:image" content="https://solemate.com/images/og-image.jpg">
+  <meta property="og:site_name" content="SoleMate">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://solemate.com/">
+  <meta property="twitter:title" content="SoleMate - Premium Sneakers">
+  <meta property="twitter:description" content="Discover our curated collection of premium sneakers designed for the modern lifestyle.">
+  <meta property="twitter:image" content="https://solemate.com/images/twitter-image.jpg">
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#ff4500">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SoleMate">
+  <meta name="msapplication-TileColor" content="#ff4500">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/icons/icon-192x192.svg">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.solemate.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <!-- Tailwind CSS is configured via PostCSS -->
+
+  <!-- Google Fonts with fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" onerror="this.onerror=null;this.href='data:text/css,body{font-family:Arial,sans-serif}';">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" onerror="this.onerror=null;this.href='data:text/css,body{font-family:Arial,sans-serif}';">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" onerror="this.onerror=null;this.href='data:text/css,body{font-family:Arial,sans-serif}';">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" onerror="this.onerror=null;this.href='data:text/css,body{font-family:Arial,sans-serif}';">
+
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" onerror="this.onerror=null;this.href='https://use.fontawesome.com/releases/v6.4.0/css/all.css';" />
+
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="dns-prefetch" href="//api.solemate.com">
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="//use.fontawesome.com">
+
+  <!-- Preload critical resources -->
+  <!-- Fonts are loaded via Google Fonts CDN -->
+
+  <!-- Critical CSS -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    #app {
+      min-height: 100vh;
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 69, 0, 0.3);
+      border-top: 3px solid #ff4500;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Hide loading spinner when app is loaded */
+    .app-loaded .loading-spinner {
+      display: none;
+    }
+
+    /* Ensure Font Awesome icons are visible */
+    .fas, .far, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands" !important;
+      font-weight: 900;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      line-height: 1;
+    }
+
+    /* Fallback for missing icons */
+    .fas::before {
+      content: attr(data-icon);
+    }
+  </style>
+
+  <title>SoleMate - Premium Sneakers for the Modern Lifestyle</title>
+</head>
+<body>
+  <!-- Vue App Mount Point -->
+  <div id="app">
+    <!-- Loading Spinner -->
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="/src/main.js"></script>
+
+  <!-- Service Worker Registration - TEMPORARILY DISABLED -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      // TEMPORARILY DISABLE SERVICE WORKER TO FIX INFINITE LOOP
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        registrations.forEach(registration => {
+          registration.unregister();
+          console.log('Service worker unregistered to fix infinite loop');
+        });
+      });
+
+      // Comment out registration until SW is fixed
+      /*
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+      */
+    }
+  </script>
+
+  <!-- PWA Install Prompt -->
+  <script>
+    // PWA Install handling - simplified
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('PWA install prompt available');
+      // Don't prevent default - let browser handle it
+    });
+
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA was installed');
+    });
+  </script>
+
+  <!-- Performance Monitoring -->
+  <script>
+    // Performance monitoring
+    window.addEventListener('load', () => {
+      // Remove loading spinner
+      document.body.classList.add('app-loaded');
+
+      // Performance metrics
+      if ('performance' in window) {
+        const perfData = performance.getEntriesByType('navigation')[0];
+        console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+        console.log('DOM Content Loaded:', perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart, 'ms');
+        console.log('First Paint:', performance.getEntriesByType('paint')[0]?.startTime, 'ms');
+      }
+    });
+  </script>
+
+  <!-- Error Tracking -->
+  <script>
+    window.addEventListener('error', (e) => {
+      console.error('Global Error:', e.error);
+      // Send error to analytics service
+    });
+
+    window.addEventListener('unhandledrejection', (e) => {
+      console.error('Unhandled Promise Rejection:', e.reason);
+      // Send error to analytics service
+    });
+  </script>
+
+  <!-- Analytics (replace with your analytics code) -->
+  <script>
+    // Google Analytics or other analytics code here
+    // gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+</body>
+</html>

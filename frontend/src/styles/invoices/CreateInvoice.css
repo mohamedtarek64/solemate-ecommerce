@@ -1,0 +1,437 @@
+/* Create Invoice Component Styles - Matching Site Design System */
+
+/* Main Container */
+.create-invoice-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+}
+
+/* Header Section */
+.create-invoice-header h1 {
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.create-invoice-header p {
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Card Styles */
+.create-invoice-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1rem;
+}
+
+.create-invoice-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Form Elements */
+.create-invoice-form select,
+.create-invoice-form input,
+.create-invoice-form textarea {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.create-invoice-form select:focus,
+.create-invoice-form input:focus,
+.create-invoice-form textarea:focus {
+  border-color: #f97316;
+  box-shadow:
+    0 0 0 3px rgba(249, 115, 22, 0.1),
+    0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+/* Labels */
+.create-invoice-form label {
+  font-weight: 600;
+  color: #374151;
+  transition: color 0.2s ease;
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Required Field Indicator */
+.create-invoice-form .required {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* Form Field Help Text */
+.create-invoice-form .help-text {
+  color: #6b7280;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin-top: 0.25rem;
+}
+
+/* Buttons */
+.create-invoice-btn {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.create-invoice-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.create-invoice-btn:hover::before {
+  left: 100%;
+}
+
+/* Primary Button (Create Invoice) */
+.create-invoice-btn-primary {
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.39);
+  color: white;
+  border: none;
+}
+
+.create-invoice-btn-primary:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: 0 6px 20px 0 rgba(249, 115, 22, 0.5);
+  transform: translateY(-2px);
+}
+
+.create-invoice-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.create-invoice-btn-primary:disabled:hover {
+  transform: none !important;
+  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.39);
+}
+
+/* Secondary Button (Cancel) */
+.create-invoice-btn-secondary {
+  background: white;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.create-invoice-btn-secondary:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+/* Success Button */
+.create-invoice-btn-success {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  box-shadow: 0 4px 14px 0 rgba(22, 163, 74, 0.39);
+  color: white;
+  border: none;
+}
+
+.create-invoice-btn-success:hover {
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  box-shadow: 0 6px 20px 0 rgba(22, 163, 74, 0.5);
+  transform: translateY(-2px);
+}
+
+/* State Cards */
+.create-invoice-state-card {
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid;
+  transition: all 0.2s ease;
+}
+
+/* Success State */
+.create-invoice-success {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.create-invoice-success-icon {
+  color: #16a34a;
+}
+
+/* Error State */
+.create-invoice-error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.create-invoice-error-icon {
+  color: #dc2626;
+}
+
+/* Loading State */
+.create-invoice-loading {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.create-invoice-spinner {
+  border-color: #f97316 transparent #f97316 transparent;
+  animation: create-invoice-spin 1s linear infinite;
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.25rem;
+  border-style: solid;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+
+@keyframes create-invoice-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Loading Text */
+.create-invoice-loading-text {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Form Grid */
+.create-invoice-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* Button Container */
+.create-invoice-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* Material Icons */
+.create-invoice-icon {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Hover Effects for Links */
+.create-invoice-link {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  text-decoration: none;
+}
+
+.create-invoice-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #f97316;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.create-invoice-link:hover::after {
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .create-invoice-container {
+    padding: 1rem;
+  }
+
+  .create-invoice-form-grid {
+    gap: 1rem;
+  }
+
+  .create-invoice-header h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .create-invoice-btn-container {
+    flex-direction: column;
+    margin-top: 1.5rem;
+  }
+
+  .create-invoice-btn-container .create-invoice-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .create-invoice-header h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .create-invoice-card {
+    margin: 0 0.5rem;
+  }
+
+  .create-invoice-state-card {
+    padding: 1rem;
+  }
+}
+
+/* Focus States */
+.create-invoice-form *:focus {
+  outline: none;
+}
+
+.create-invoice-form *:focus-visible {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Smooth Transitions */
+.create-invoice-container * {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Enhanced Shadows */
+.create-invoice-shadow {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.create-invoice-shadow-lg {
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Form Field Spacing */
+.create-invoice-form .field-container {
+  margin-bottom: 1.5rem;
+}
+
+.create-invoice-form .field-container:last-child {
+  margin-bottom: 0;
+}
+
+/* Text Colors */
+.create-invoice-text-primary {
+  color: #1f2937;
+}
+
+.create-invoice-text-secondary {
+  color: #6b7280;
+}
+
+.create-invoice-text-muted {
+  color: #9ca3af;
+}
+
+/* Animation for Success/Error States */
+.create-invoice-fade-in {
+  animation: create-invoice-fadeIn 0.3s ease-in-out;
+}
+
+@keyframes create-invoice-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button Loading State */
+.create-invoice-btn-loading {
+  position: relative;
+  color: transparent;
+}
+
+.create-invoice-btn-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  margin: -0.5rem 0 0 -0.5rem;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: create-invoice-spin 1s linear infinite;
+}
+
+/* Enhanced Form Validation States */
+.create-invoice-form .field-error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.create-invoice-form .field-success {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+/* Custom Scrollbar for Textarea */
+.create-invoice-form textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.create-invoice-form textarea::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.create-invoice-form textarea::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.create-invoice-form textarea::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

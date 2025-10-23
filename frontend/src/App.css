@@ -1,0 +1,154 @@
+@import '@/assets/styles/variables.css';
+@import '@/assets/styles/globals.css';
+
+/* Ensure proper font loading */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* Smooth scrolling for the entire app */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-orange);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e63900;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Ensure proper text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* Ensure proper box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure proper image rendering */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure proper button styling */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Ensure proper link styling */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Ensure proper input styling */
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Ensure proper list styling */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Ensure proper table styling */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Ensure proper fieldset styling */
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure proper legend styling */
+legend {
+  padding: 0;
+}
+
+/* Ensure proper progress styling */
+progress {
+  vertical-align: baseline;
+}
+
+/* Ensure proper meter styling */
+meter {
+  vertical-align: baseline;
+}
+
+/* Ensure proper details styling */
+details {
+  display: block;
+}
+
+/* Ensure proper summary styling */
+summary {
+  display: list-item;
+  cursor: pointer;
+}
+
+/* Ensure proper template styling */
+template {
+  display: none;
+}
+
+/* Ensure proper hidden styling */
+[hidden] {
+  display: none !important;
+}
