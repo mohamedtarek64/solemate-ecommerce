@@ -1,22 +1,16 @@
 <template>
-  <div 
-    ref="containerRef" 
+  <div
+    ref="containerRef"
     class="virtual-scroll-container"
     :style="containerStyle"
     @scroll="handleScroll"
   >
-    <div 
-      class="virtual-scroll-spacer" 
-      :style="{ height: `${totalHeight}px` }"
-    >
-      <div 
-        class="virtual-scroll-content"
-        :style="{ transform: `translateY(${offsetY}px)` }"
-      >
-        <slot 
-          name="item"
+    <div class="virtual-scroll-spacer" :style="{ height: `${totalHeight}px` }">
+      <div class="virtual-scroll-content" :style="{ transform: `translateY(${offsetY}px)` }">
+        <slot
           v-for="item in visibleItems"
           :key="getItemKey(item)"
+          name="item"
           :item="item"
           :index="item.__index"
         />
@@ -37,13 +31,9 @@
     </div>
 
     <!-- Load more trigger -->
-    <div 
-      v-if="hasMore && !loading"
-      ref="loadMoreRef"
-      class="virtual-scroll-load-more"
-    >
+    <div v-if="hasMore && !loading" ref="loadMoreRef" class="virtual-scroll-load-more">
       <slot name="load-more">
-        <button @click="$emit('load-more')" class="load-more-button">
+        <button class="load-more-button" @click="$emit('load-more')">
           {{ loadMoreText }}
         </button>
       </slot>
@@ -52,202 +42,207 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
 
 const props = defineProps({
   items: {
     type: Array,
-    required: true
+    required: true,
   },
   itemHeight: {
     type: Number,
-    default: 100
+    default: 100,
   },
   buffer: {
     type: Number,
-    default: 5
+    default: 5,
   },
   containerHeight: {
     type: [Number, String],
-    default: '100%'
+    default: '100%',
   },
   itemKey: {
     type: [String, Function],
-    default: 'id'
+    default: 'id',
   },
   loading: {
     type: Boolean,
-    default: false
+    default: false,
   },
   loadingText: {
     type: String,
-    default: 'Loading...'
+    default: 'Loading...',
   },
   emptyText: {
     type: String,
-    default: 'No items to display'
+    default: 'No items to display',
   },
   hasMore: {
     type: Boolean,
-    default: false
+    default: false,
   },
   loadMoreText: {
     type: String,
-    default: 'Load More'
+    default: 'Load More',
   },
   loadMoreThreshold: {
     type: Number,
-    default: 200
-  }
-})
+    default: 200,
+  },
+});
 
-const emit = defineEmits(['load-more', 'scroll'])
+const emit = defineEmits(['load-more', 'scroll']);
 
 // Refs
-const containerRef = ref(null)
-const loadMoreRef = ref(null)
-const scrollTop = ref(0)
-const containerHeight = ref(0)
+const containerRef = ref(null);
+const loadMoreRef = ref(null);
+const scrollTop = ref(0);
+const containerHeight = ref(0);
 
 // Computed
-const totalHeight = computed(() => props.items.length * props.itemHeight)
+const totalHeight = computed(() => props.items.length * props.itemHeight);
 
 const visibleStart = computed(() => {
-  const start = Math.floor(scrollTop.value / props.itemHeight) - props.buffer
-  return Math.max(0, start)
-})
+  const start = Math.floor(scrollTop.value / props.itemHeight) - props.buffer;
+  return Math.max(0, start);
+});
 
 const visibleEnd = computed(() => {
-  const itemsInView = Math.ceil(containerHeight.value / props.itemHeight)
-  const end = visibleStart.value + itemsInView + props.buffer * 2
-  return Math.min(props.items.length, end)
-})
+  const itemsInView = Math.ceil(containerHeight.value / props.itemHeight);
+  const end = visibleStart.value + itemsInView + props.buffer * 2;
+  return Math.min(props.items.length, end);
+});
 
 const visibleItems = computed(() => {
-  return props.items
-    .slice(visibleStart.value, visibleEnd.value)
-    .map((item, index) => ({
-      ...item,
-      __index: visibleStart.value + index
-    }))
-})
+  return props.items.slice(visibleStart.value, visibleEnd.value).map((item, index) => ({
+    ...item,
+    __index: visibleStart.value + index,
+  }));
+});
 
 const offsetY = computed(() => {
-  return visibleStart.value * props.itemHeight
-})
+  return visibleStart.value * props.itemHeight;
+});
 
 const containerStyle = computed(() => {
-  const height = typeof props.containerHeight === 'number'
-    ? `${props.containerHeight}px`
-    : props.containerHeight
-  
+  const height =
+    typeof props.containerHeight === 'number'
+      ? `${props.containerHeight}px`
+      : props.containerHeight;
+
   return {
     height,
     overflow: 'auto',
-    position: 'relative'
-  }
-})
+    position: 'relative',
+  };
+});
 
 // Methods
 const getItemKey = (item) => {
   if (typeof props.itemKey === 'function') {
-    return props.itemKey(item)
+    return props.itemKey(item);
   }
-  return item[props.itemKey] || item.__index
-}
+  return item[props.itemKey] || item.__index;
+};
 
 const handleScroll = (e) => {
-  const target = e.target
-  scrollTop.value = target.scrollTop
-  
+  const target = e.target;
+  scrollTop.value = target.scrollTop;
+
   emit('scroll', {
     scrollTop: target.scrollTop,
     scrollHeight: target.scrollHeight,
-    clientHeight: target.clientHeight
-  })
+    clientHeight: target.clientHeight,
+  });
 
   // Check if should load more
   if (props.hasMore && !props.loading) {
-    const distanceToBottom = target.scrollHeight - (target.scrollTop + target.clientHeight)
+    const distanceToBottom = target.scrollHeight - (target.scrollTop + target.clientHeight);
     if (distanceToBottom < props.loadMoreThreshold) {
-      emit('load-more')
+      emit('load-more');
     }
   }
-}
+};
 
 const updateContainerHeight = () => {
   if (containerRef.value) {
-    containerHeight.value = containerRef.value.clientHeight
+    containerHeight.value = containerRef.value.clientHeight;
   }
-}
+};
 
 const scrollToTop = () => {
   if (containerRef.value) {
-    containerRef.value.scrollTop = 0
+    containerRef.value.scrollTop = 0;
   }
-}
+};
 
 const scrollToIndex = (index) => {
   if (containerRef.value) {
-    const targetScroll = index * props.itemHeight
-    containerRef.value.scrollTop = targetScroll
+    const targetScroll = index * props.itemHeight;
+    containerRef.value.scrollTop = targetScroll;
   }
-}
+};
 
 const scrollToBottom = () => {
   if (containerRef.value) {
-    containerRef.value.scrollTop = totalHeight.value
+    containerRef.value.scrollTop = totalHeight.value;
   }
-}
+};
 
 // Watch for items changes
-watch(() => props.items.length, () => {
-  nextTick(() => {
-    updateContainerHeight()
-  })
-})
+watch(
+  () => props.items.length,
+  () => {
+    nextTick(() => {
+      updateContainerHeight();
+    });
+  }
+);
 
 // Lifecycle
 onMounted(() => {
-  updateContainerHeight()
-  
+  updateContainerHeight();
+
   // Setup resize observer
   if (typeof ResizeObserver !== 'undefined' && containerRef.value) {
     const resizeObserver = new ResizeObserver(() => {
-      updateContainerHeight()
-    })
-    resizeObserver.observe(containerRef.value)
+      updateContainerHeight();
+    });
+    resizeObserver.observe(containerRef.value);
 
     onBeforeUnmount(() => {
-      resizeObserver.disconnect()
-    })
+      resizeObserver.disconnect();
+    });
   }
 
   // Setup Intersection Observer for load more
   if (props.hasMore && loadMoreRef.value) {
-    const intersectionObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !props.loading) {
-        emit('load-more')
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !props.loading) {
+          emit('load-more');
+        }
+      },
+      {
+        threshold: 0.1,
       }
-    }, {
-      threshold: 0.1
-    })
+    );
 
-    intersectionObserver.observe(loadMoreRef.value)
+    intersectionObserver.observe(loadMoreRef.value);
 
     onBeforeUnmount(() => {
-      intersectionObserver.disconnect()
-    })
+      intersectionObserver.disconnect();
+    });
   }
-})
+});
 
 // Expose methods
 defineExpose({
   scrollToTop,
   scrollToIndex,
   scrollToBottom,
-  updateContainerHeight
-})
+  updateContainerHeight,
+});
 </script>
 
 <style scoped>
@@ -352,4 +347,3 @@ defineExpose({
   }
 }
 </style>
-

@@ -25,10 +25,10 @@
 
     <!-- Payment Button -->
     <button
-      @click="handlePayment"
       :disabled="loading || !stripe || !elements"
       class="pay-button"
       :class="{ loading: loading }"
+      @click="handlePayment"
     >
       <span v-if="loading" class="spinner-small"></span>
       <span v-else class="material-symbols-outlined">credit_card</span>
@@ -55,48 +55,48 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { loadStripe } from '@stripe/stripe-js'
+import { ref, onMounted, onUnmounted } from 'vue';
+import { loadStripe } from '@stripe/stripe-js';
 
 const props = defineProps({
   amount: {
     type: Number,
-    required: true
+    required: true,
   },
   orderId: {
     type: Number,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const emit = defineEmits(['success', 'error'])
+const emit = defineEmits(['success', 'error']);
 
 // State
-const stripe = ref(null)
-const elements = ref(null)
-const cardElement = ref(null)
-const loading = ref(false)
-const cardError = ref('')
-const clientSecret = ref('')
+const stripe = ref(null);
+const elements = ref(null);
+const cardElement = ref(null);
+const loading = ref(false);
+const cardError = ref('');
+const clientSecret = ref('');
 
 // Format amount
 const formatAmount = (amount) => {
-  return parseFloat(amount).toFixed(2)
-}
+  return parseFloat(amount).toFixed(2);
+};
 
 // Initialize Stripe
 const initializeStripe = async () => {
   try {
     // Load Stripe
-    const stripeKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY || 'pk_test_your_public_key_here'
-    stripe.value = await loadStripe(stripeKey)
+    const stripeKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY || 'pk_test_your_public_key_here';
+    stripe.value = await loadStripe(stripeKey);
 
     if (!stripe.value) {
-      throw new Error('Failed to load Stripe')
+      throw new Error('Failed to load Stripe');
     }
 
     // Create elements
-    elements.value = stripe.value.elements()
+    elements.value = stripe.value.elements();
 
     // Create card element
     const style = {
@@ -106,145 +106,144 @@ const initializeStripe = async () => {
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
-          color: '#8b7355'
-        }
+          color: '#8b7355',
+        },
       },
       invalid: {
         color: '#ef4444',
-        iconColor: '#ef4444'
-      }
-    }
+        iconColor: '#ef4444',
+      },
+    };
 
-    cardElement.value = elements.value.create('card', { style })
-    cardElement.value.mount('#card-element')
+    cardElement.value = elements.value.create('card', { style });
+    cardElement.value.mount('#card-element');
 
     // Handle card errors
     cardElement.value.on('change', (event) => {
-      cardError.value = event.error ? event.error.message : ''
-    })
-
-    } catch (error) {
-    console.error('❌ Stripe initialization error:', error)
-    emit('error', error.message)
+      cardError.value = event.error ? event.error.message : '';
+    });
+  } catch (error) {
+    console.error('❌ Stripe initialization error:', error);
+    emit('error', error.message);
   }
-}
+};
 
 // Create payment intent
 const createPaymentIntent = async () => {
   try {
-    const token = localStorage.getItem('auth_token')
+    const token = localStorage.getItem('auth_token');
     const response = await fetch('http://127.0.0.1:8000/api/payment/create-intent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         amount: props.amount,
         currency: 'usd',
-        order_id: props.orderId
-      })
-    })
+        order_id: props.orderId,
+      }),
+    });
 
-    const data = await response.json()
+    const data = await response.json();
 
     if (data.success) {
-      clientSecret.value = data.data.client_secret
-      return data.data
+      clientSecret.value = data.data.client_secret;
+      return data.data;
     } else {
-      throw new Error(data.message || 'Failed to create payment intent')
+      throw new Error(data.message || 'Failed to create payment intent');
     }
   } catch (error) {
-    console.error('Error creating payment intent:', error)
-    throw error
+    console.error('Error creating payment intent:', error);
+    throw error;
   }
-}
+};
 
 // Handle payment
 const handlePayment = async () => {
   if (!stripe.value || !cardElement.value) {
-    cardError.value = 'Stripe not initialized'
-    return
+    cardError.value = 'Stripe not initialized';
+    return;
   }
 
-  loading.value = true
-  cardError.value = ''
+  loading.value = true;
+  cardError.value = '';
 
   try {
     // Create payment intent
-    const paymentData = await createPaymentIntent()
+    const paymentData = await createPaymentIntent();
 
     // Confirm card payment
     const { error, paymentIntent } = await stripe.value.confirmCardPayment(
       paymentData.client_secret,
       {
         payment_method: {
-          card: cardElement.value
-        }
+          card: cardElement.value,
+        },
       }
-    )
+    );
 
     if (error) {
-      cardError.value = error.message
-      emit('error', error.message)
+      cardError.value = error.message;
+      emit('error', error.message);
     } else if (paymentIntent.status === 'succeeded') {
       // Confirm payment with backend
-      await confirmPayment(paymentIntent.id)
+      await confirmPayment(paymentIntent.id);
       emit('success', {
         paymentIntentId: paymentIntent.id,
-        amount: paymentIntent.amount / 100
-      })
+        amount: paymentIntent.amount / 100,
+      });
     }
   } catch (error) {
-    cardError.value = error.message
-    emit('error', error.message)
-    console.error('Payment error:', error)
+    cardError.value = error.message;
+    emit('error', error.message);
+    console.error('Payment error:', error);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 
 // Confirm payment with backend
 const confirmPayment = async (paymentIntentId) => {
   try {
-    const token = localStorage.getItem('auth_token')
+    const token = localStorage.getItem('auth_token');
     const response = await fetch('http://127.0.0.1:8000/api/payment/confirm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         payment_intent_id: paymentIntentId,
-        order_id: props.orderId
-      })
-    })
+        order_id: props.orderId,
+      }),
+    });
 
-    const data = await response.json()
+    const data = await response.json();
 
     if (!data.success) {
-      throw new Error(data.message || 'Payment confirmation failed')
+      throw new Error(data.message || 'Payment confirmation failed');
     }
 
-    return data
+    return data;
   } catch (error) {
-    console.error('Error confirming payment:', error)
-    throw error
+    console.error('Error confirming payment:', error);
+    throw error;
   }
-}
+};
 
 // Lifecycle
 onMounted(() => {
-  initializeStripe()
-})
+  initializeStripe();
+});
 
 onUnmounted(() => {
   if (cardElement.value) {
-    cardElement.value.destroy()
+    cardElement.value.destroy();
   }
-})
+});
 </script>
 
 <style scoped>
@@ -384,7 +383,9 @@ onUnmounted(() => {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .payment-methods {

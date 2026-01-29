@@ -12,8 +12,8 @@
             <!-- Filter Dropdown -->
             <select
               v-model="selectedStatus"
-              @change="handleFilterChange"
               class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              @change="handleFilterChange"
             >
               <option value="">All Statuses</option>
               <option value="draft">Draft</option>
@@ -25,8 +25,8 @@
             <!-- Type Filter -->
             <select
               v-model="selectedType"
-              @change="handleFilterChange"
               class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              @change="handleFilterChange"
             >
               <option value="">All Types</option>
               <option value="sale">Sale Invoice</option>
@@ -44,8 +44,18 @@
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    ></path>
                   </svg>
                 </div>
               </div>
@@ -60,8 +70,18 @@
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
                   </svg>
                 </div>
               </div>
@@ -76,8 +96,18 @@
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
                   </svg>
                 </div>
               </div>
@@ -92,8 +122,18 @@
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    ></path>
                   </svg>
                 </div>
               </div>
@@ -119,8 +159,8 @@
       <div v-else-if="error" class="p-8 text-center">
         <div class="text-red-500 text-sm">{{ error }}</div>
         <button
-          @click="fetchInvoices"
           class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          @click="fetchInvoices"
         >
           Retry
         </button>
@@ -130,7 +170,12 @@
       <div v-else-if="invoices.length === 0" class="p-8 text-center">
         <div class="text-gray-400 mb-4">
           <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            ></path>
           </svg>
         </div>
         <h3 class="text-lg font-medium text-gray-900 mb-2">No Invoices</h3>
@@ -142,32 +187,40 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Invoice Number
               </th>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Type
               </th>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Amount
               </th>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Status
               </th>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Due Date
               </th>
-              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Actions
               </th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr
-              v-for="invoice in invoices"
-              :key="invoice.id"
-              class="hover:bg-gray-50"
-            >
+            <tr v-for="invoice in invoices" :key="invoice.id" class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm font-medium text-gray-900">
                   {{ invoice.invoice_number }}
@@ -199,9 +252,7 @@
                 >
                   {{ getStatusText(invoice.status) }}
                 </span>
-                <div v-if="isOverdue(invoice)" class="text-xs text-red-600 mt-1">
-                  Overdue
-                </div>
+                <div v-if="isOverdue(invoice)" class="text-xs text-red-600 mt-1">Overdue</div>
               </td>
 
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -211,23 +262,23 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <div class="flex items-center space-x-2">
                   <button
-                    @click="viewInvoice(invoice.id)"
                     class="text-blue-600 hover:text-blue-900"
+                    @click="viewInvoice(invoice.id)"
                   >
                     View
                   </button>
 
                   <button
                     v-if="invoice.status !== 'paid'"
-                    @click="markAsPaid(invoice.id)"
                     class="text-green-600 hover:text-green-900"
+                    @click="markAsPaid(invoice.id)"
                   >
                     Pay
                   </button>
 
                   <button
-                    @click="downloadInvoice(invoice.id)"
                     class="text-gray-600 hover:text-gray-900"
+                    @click="downloadInvoice(invoice.id)"
                   >
                     Download
                   </button>
@@ -246,9 +297,9 @@
           </div>
           <div class="flex items-center space-x-2">
             <button
-              @click="goToPage(pagination.current_page - 1)"
               :disabled="pagination.current_page === 1"
               class="px-3 py-1 text-sm border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              @click="goToPage(pagination.current_page - 1)"
             >
               Previous
             </button>
@@ -258,9 +309,9 @@
             </span>
 
             <button
-              @click="goToPage(pagination.current_page + 1)"
               :disabled="pagination.current_page === pagination.last_page"
               class="px-3 py-1 text-sm border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              @click="goToPage(pagination.current_page + 1)"
             >
               Next
             </button>
@@ -272,12 +323,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useInvoices } from '@/composables/useInvoices'
+import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useInvoices } from '@/composables/useInvoices';
 
 // Composables
-const router = useRouter()
+const router = useRouter();
 const {
   invoices,
   statistics,
@@ -291,56 +342,53 @@ const {
   formatDate,
   getStatusText,
   getTypeText,
-  getStatusColor
-} = useInvoices()
+  getStatusColor,
+} = useInvoices();
 
 // Local state
-const selectedStatus = ref('')
-const selectedType = ref('')
-const pagination = ref(null)
+const selectedStatus = ref('');
+const selectedType = ref('');
+const pagination = ref(null);
 
 // Methods
 const handleFilterChange = async () => {
   await fetchInvoices({
     status: selectedStatus.value || undefined,
-    type: selectedType.value || undefined
-  })
-}
+    type: selectedType.value || undefined,
+  });
+};
 
 const viewInvoice = (invoiceId) => {
-  router.push(`/invoices/${invoiceId}`)
-}
+  router.push(`/invoices/${invoiceId}`);
+};
 
 const isOverdue = (invoice) => {
-  if (invoice.status === 'paid' || !invoice.due_date) return false
-  return new Date(invoice.due_date) < new Date()
-}
+  if (invoice.status === 'paid' || !invoice.due_date) return false;
+  return new Date(invoice.due_date) < new Date();
+};
 
 const getStatusBadgeClass = (status) => {
   const classes = {
     draft: 'bg-gray-100 text-gray-800',
     sent: 'bg-blue-100 text-blue-800',
     paid: 'bg-green-100 text-green-800',
-    cancelled: 'bg-red-100 text-red-800'
-  }
-  return classes[status] || 'bg-gray-100 text-gray-800'
-}
+    cancelled: 'bg-red-100 text-red-800',
+  };
+  return classes[status] || 'bg-gray-100 text-gray-800';
+};
 
 const goToPage = async (page) => {
   await fetchInvoices({
     page,
     status: selectedStatus.value || undefined,
-    type: selectedType.value || undefined
-  })
-}
+    type: selectedType.value || undefined,
+  });
+};
 
 // Initialize
 onMounted(async () => {
-  await Promise.all([
-    fetchInvoices(),
-    fetchStatistics()
-  ])
-  })
+  await Promise.all([fetchInvoices(), fetchStatistics()]);
+});
 </script>
 
 <style scoped>
